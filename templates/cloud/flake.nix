@@ -1,5 +1,5 @@
 {
-  description = "my project description";
+  description = "NixForged cloud development environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -19,12 +19,18 @@
         pkgs = import nixpkgs {
           inherit system;
 
-          # Terraforms new licensing model now requires this
+          # The new Terraform licensing model now requires this
           config.allowUnfree = true;
         };
       in {
-        devShells.default = nixforge.cloud.${system}.shell {
+        devShells.default = nixforge.cloud.shell {
           inherit pkgs;
+
+          # Extra build inputs to install
+          buildInputs = [];
+
+          # Extra shell hooks to install
+          shellHook = "";
         };
       }
     );
