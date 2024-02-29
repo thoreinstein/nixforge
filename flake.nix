@@ -1,31 +1,32 @@
 {
-  description = "NixForge - Reusable devShells and neovim configurations";
+  description = "Description for the project";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
-    self,
     nixpkgs,
     flake-utils,
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        templates = {
-          cloud = {
-            path = ./templates/cloud;
-            description = "Preconfigured devshell and neovim lsp + settings for IaC";
-          };
-        };
-        neovim = {
-          shell = import ./modules/neovim/shell.nix;
-          nvim = import ./modules/neovim/lua.nix;
-        };
-        devShells.default = import ./modules/neovim/shell.nix {inherit pkgs;};
-      }
-    );
+    ...
+  }: {
+    templates = {
+      cloud = {
+        path = ./templates/cloud;
+        description = ''
+          Preconfigured nix shell and neovim config for writing IaC
+        '';
+      };
+    };
+    neovim = {
+      shell = import ./modules/neovim/shell.nix;
+      lua = import ./modules/neovim/lua.nix;
+    };
+    devShells.x86_64-linux = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in {
+      default = import ./modules/neovim/shell.nix {inherit pkgs;};
+    };
+  };
 }
