@@ -23,6 +23,10 @@
       shell = import ./modules/neovim/shell.nix;
       lua = import ./modules/neovim/lua.nix;
     };
+    cloud = {
+      shell = import ./modules/cloud/shell.nix;
+      lua = import ./modules/cloud/lua.nix;
+    };
     devShells.x86_64-linux = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in {
