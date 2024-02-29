@@ -6,3 +6,20 @@ local capabilities =
 lspconfig.terraformls.setup({
 	capabilities = capabilities,
 })
+
+lspconfig.ansiblels.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.yamlls.setup({
+	capabilities = capabilities,
+
+	settings = {
+		yaml = {
+      schemaStore = {
+        enable = true,
+        url = "https://www.schemastore.org/api/json/catalog.json",
+      },
+    },
+	},
+})

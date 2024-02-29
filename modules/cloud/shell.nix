@@ -12,9 +12,13 @@ in
       buildInputs =
         [
           alejandra
+          ansible
+          ansible-language-server
           luaFile
+          kubectl
           terraform
           terraform-ls
+          yaml-language-server
         ]
         ++ newBuildInputs;
 
