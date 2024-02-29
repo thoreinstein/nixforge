@@ -15,6 +15,12 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in {
+        templates = {
+          cloud = {
+            path = ./templates/cloud;
+            description = "Preconfigured devshell and neovim lsp + settings for IaC";
+          };
+        };
         neovim = {
           shell = import ./modules/neovim/shell.nix;
           nvim = import ./modules/neovim/lua.nix;
