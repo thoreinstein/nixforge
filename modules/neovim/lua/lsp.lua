@@ -13,6 +13,9 @@ lspconfig.lua_ls.setup({
 					runtime = {
 						version = "LuaJIT",
 					},
+          diagnostics = {
+            globals = { "vim" },
+          },
 					workspace = {
 						checkThirdParty = false,
 						library = {
