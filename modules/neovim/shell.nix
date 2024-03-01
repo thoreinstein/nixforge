@@ -21,9 +21,24 @@ in
 
     shellHook =
       ''
-        cp ${luaFile}/.nvim.lua ./
+        lua_file=".nvim.lua"
+        lock_file="/tmp/nixforge-neovim"
 
-        trap 'rm -f ./.nvim.lua' EXIT
+        cleanup() {
+          if [ -f "$lock_file" ] && [ "$(cat $lock_file)" = "$$" ]; then
+            rm -f "$lua_file"
+            rm -f "$lock_file"
+          fi
+        }
+
+        if [ ! -f "$lua_file" ]; then
+          cp ${luaFile}/"$lua_file" ./
+        fi
+
+        if [ ! -f "$lock_file" ]; then
+          echo $$ > "$lock_file"
+          trap cleanup EXIT
+        fi
       ''
       + newShellHook;
   }
