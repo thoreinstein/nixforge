@@ -26,19 +26,16 @@ in
 
           cleanup() {
             if [ -f "$lock_file" ] && [ "$(cat $lock_file)" = "$$" ]; then
-              echo "Removing $lock_file and $lua_file"
               rm -f "$lua_file"
               rm -f "$lock_file"
             fi
           }
 
           if [ ! -f "$lua_file" ]; then
-            echo "$lua_file does not exist, copying from ${luaFile}"
             cp ${luaFile}/"$lua_file" ./
           fi
 
           if [ ! -f "$lock_file" ]; then
-            echo "Creating $lock_file with $$"
             echo $$ > "$lock_file"
             trap cleanup EXIT
           fi
