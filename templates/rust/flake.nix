@@ -26,16 +26,9 @@
           inherit system overlays;
         };
 
-        toolchain = pkgs.rustChannelOf({
-          rustToolchain = ./rust-toolchain;
-          sha256 = "";
-          #        ^ After you run `nix build`, replace this with the actual
-          #          hash from the error message
-        }).rust;
-
         naersk' = pkgs.callPackage naersk {
-          cargo = toolchain;
-          rustc = toolchain;
+          cargo = pkgs.rust-bin.stable.latest.cargo;
+          rustc = pkgs.rust-bin.stable.latest.rustc;
         };
       in {
         packages = {
