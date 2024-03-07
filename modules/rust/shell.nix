@@ -36,5 +36,5 @@ in
           fi
 
         ''
-        ++ newShellHook;
+        + newShellHook;
     }
