@@ -13,8 +13,9 @@ in
     buildInputs =
       [
         alejandra
-        luaFile
         lua-language-server
+        luaFile
+        nil
         stylua
       ]
       ++ newBuildInputs;

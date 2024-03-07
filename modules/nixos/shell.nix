@@ -1,12 +1,17 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> {config = {allowUnfree = true;};},
+  buildInputs ? [],
+  shellHook ? "",
+}: let
+  luaFile = pkgs.callPackage ./lua.nix {inherit pkgs;};
+  newBuildInputs = buildInputs;
+  newShellHook = shellHook;
+in
+  with pkgs;
+    mkShell {
+      buildInputs = [alejandra luaFile nil codespell nodePackages.bash-language-server nixfmt shellharden];
 
-with pkgs;
-
-mkShell {
-  buildInputs =
-    [ nil codespell nodePackages.bash-language-server nixfmt shellharden ];
-
-  shellHook = ''
+      shellHook = ''
         lua_file=".nvim.lua"
         lock_file="/tmp/nixforge-cloud"
 
@@ -25,6 +30,5 @@ mkShell {
           echo $$ > "$lock_file"
           trap cleanup EXIT
         fi
-        '';
-}
-
+      '';
+    }

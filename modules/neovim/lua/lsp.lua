@@ -29,6 +29,6 @@ lspconfig.lua_ls.setup({
 	end,
 })
 
-lspconfig.rnix.setup({
+lspconfig.nil_ls.setup({
 	capabilities = capabilities,
 })
