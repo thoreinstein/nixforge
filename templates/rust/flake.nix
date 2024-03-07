@@ -57,7 +57,9 @@
 
           # Extra build inputs to install
           buildInputs = with pkgs; [
-            toolchain
+            (rust-bin.stable.latest.default.override {
+              extensions = ["rust-src" ];
+            })
           ];
 
           # Extra shell hooks to install

@@ -9,7 +9,15 @@
 in
   with pkgs;
     mkShell {
-      buildInputs = [alejandra luaFile nil rustfmt] ++ newBuildInputs;
+      buildInputs =
+        [
+          alejandra
+          luaFile
+          nil
+          rust-analyzer
+          rustfmt
+        ]
+        ++ newBuildInputs;
 
       shellHook =
         ''
