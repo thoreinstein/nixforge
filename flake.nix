@@ -28,6 +28,12 @@
           Preconfigured nix shell and neovim config for writing nix
         '';
       };
+      rust = {
+        path = ./templates/rust;
+        description = ''
+          Preconfigured nix shell and neovim config for writing rust
+        '';
+      };
     };
     neovim = {
       shell = import ./modules/neovim/shell.nix;
@@ -40,6 +46,10 @@
     nixos = {
       shell = import ./modules/nixos/shell.nix;
       lua = import ./modules/nixos/lua.nix;
+    };
+    rust = {
+      shell = import ./modules/rust/shell.nix;
+      lua = import ./modules/rust/lua.nix;
     };
     devShells.x86_64-linux = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
