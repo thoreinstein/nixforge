@@ -23,7 +23,7 @@
           config.allowUnfree = true;
         };
       in {
-        devShells.default = nixforge.cloud.shell {
+        devShells.default = nixforge.neovim.shell {
           inherit pkgs;
 
           # Extra build inputs to install
