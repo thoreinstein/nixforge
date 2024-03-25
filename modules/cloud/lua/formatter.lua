@@ -7,5 +7,8 @@ require("conform").setup({
 		nix = {
 			"alejandra",
 		},
+		sh = {
+			"beautysh",
+		},
 	},
 })

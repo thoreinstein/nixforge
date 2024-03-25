@@ -14,8 +14,12 @@ in
           alejandra
           ansible
           ansible-language-server
+          beautysh
           luaFile
           kubectl
+          kubernetes-helm
+          nodePackages_latest.bash-language-server
+          shellharden
           terraform
           terraform-ls
           yaml-language-server

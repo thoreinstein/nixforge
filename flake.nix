@@ -56,5 +56,10 @@
     in {
       default = import ./modules/neovim/shell.nix {inherit pkgs;};
     };
+    devShells.aarch64-darwin = let
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    in {
+      default = import ./modules/neovim/shell.nix {inherit pkgs;};
+    };
   };
 }
