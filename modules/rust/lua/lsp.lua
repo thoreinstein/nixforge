@@ -10,3 +10,5 @@ local capabilities = vim.tbl_deep_extend(
 lspconfig.rust_analyzer.setup({
     capabilities = capabilities,
 })
+
+vim.keymap.set("n", "<leader>ct", ":FloatermNew cargo test<cr>")

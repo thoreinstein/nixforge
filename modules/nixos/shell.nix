@@ -31,6 +31,11 @@ in
             echo $$ > "$lock_file"
             trap cleanup EXIT
           fi
+
+          alias nd="nix develop"
+          alias ne="exit"
+          alias nfu="nix flake update"
+          alias nr="nix repl"
         ''
         + newShellHook;
     }
