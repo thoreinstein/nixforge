@@ -1,5 +1,5 @@
 {
-  pkgs ? import <nixpkgs> {config = {allowUnfree = true;};},
+  pkgs,
   buildInputs ? [],
   shellHook ? "",
 }: let
@@ -9,6 +9,7 @@
 in
   with pkgs;
     mkShell {
+      name = "NixForge Cloud Shell";
       buildInputs =
         [
           alejandra
@@ -47,11 +48,12 @@ in
             trap cleanup EXIT
           fi
 
-          alias tp="${pkgs.terraform}/bin/terraform plan"
-          alias ta="${pkgs.terraform}/bin/terraform apply"
-          alias td="${pkgs.terraform}/bin/terraform destroy"
-          alias ti="${pkgs.terraform}/bin/terraform init -upgrade"
-          alias tc="${pkgs.terraform}/bin/terraform console"
+          alias ta='${pkgs.terraform}/bin/terraform apply'
+          alias tay='${pkgs.terraform}/bin/terraform apply -auto-approve'
+          alias tc='${pkgs.terraform}/bin/terraform console'
+          alias td='${pkgs.terraform}/bin/terraform destroy'
+          alias tp='${pkgs.terraform}/bin/terraform plan'
+          alias ts='${pkgs.terraform}/bin/terraform state'
 
           source <(kubectl completion bash)
           source <(helm completion bash)
