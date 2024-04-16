@@ -4,6 +4,10 @@ local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_clie
 
 lspconfig.terraformls.setup({
 	capabilities = capabilities,
+
+  settings = {
+    filetypes = { "terraform", "tf", "hcl"},
+  }
 })
 
 lspconfig.ansiblels.setup({

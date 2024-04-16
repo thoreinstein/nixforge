@@ -1,5 +1,5 @@
 {
-  pkgs,
+  pkgs ? import <nixpkgs> {config = {allowUnfree = true;};},
   packages ? [],
   shellHook ? "",
 }: let
@@ -9,24 +9,21 @@
 in
   with pkgs;
     mkShell {
-      name = "NixForge Cloud Shell";
       packages =
         [
           alejandra
           ansible
           ansible-language-server
           ansible-lint
-          beautysh
+          argocd
           cloudflared
           k3sup
           kubectl
           kubernetes-helm
           luaFile
-          nodePackages_latest.bash-language-server
-          shellharden
+          packer
           terraform
           terraform-ls
-          vault
           yaml-language-server
         ]
         ++ newPackages;
@@ -52,13 +49,11 @@ in
             trap cleanup EXIT
           fi
 
-          alias ta='${pkgs.terraform}/bin/terraform apply'
-          alias tay='${pkgs.terraform}/bin/terraform apply -auto-approve'
-          alias tc='${pkgs.terraform}/bin/terraform console'
-          alias td='${pkgs.terraform}/bin/terraform destroy'
-          alias tdy='${pkgs.terraform}/bin/terraform destroy -auto-approve'
-          alias tp='${pkgs.terraform}/bin/terraform plan'
-          alias ts='${pkgs.terraform}/bin/terraform state'
+          alias tp="${pkgs.terraform}/bin/terraform plan"
+          alias ta="${pkgs.terraform}/bin/terraform apply"
+          alias td="${pkgs.terraform}/bin/terraform destroy"
+          alias ti="${pkgs.terraform}/bin/terraform init -upgrade"
+          alias tc="${pkgs.terraform}/bin/terraform console"
 
           source <(kubectl completion bash)
           source <(helm completion bash)

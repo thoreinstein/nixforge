@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
   pkgs,
+  buildInputs ? [],
+||||||| parent of 1f4c332 (WIP)
+  pkgs ? import <nixpkgs> {config = {allowUnfree = true;};},
+  buildInputs ? [],
+=======
+  pkgs ? import <nixpkgs> {config = {allowUnfree = true;};},
   packages ? [],
+>>>>>>> 1f4c332 (WIP)
   shellHook ? "",
 }: let
   luaFile = pkgs.callPackage ./lua.nix {inherit pkgs;};
@@ -9,24 +17,41 @@
 in
   with pkgs;
     mkShell {
+<<<<<<< HEAD
       name = "NixForge Cloud Shell";
+      buildInputs =
+||||||| parent of 1f4c332 (WIP)
+      buildInputs =
+=======
       packages =
+>>>>>>> 1f4c332 (WIP)
         [
           alejandra
           ansible
           ansible-language-server
-          ansible-lint
+<<<<<<< HEAD
           beautysh
+          luaFile
+||||||| parent of 1f4c332 (WIP)
+          luaFile
+=======
+          ansible-lint
+          argocd
           cloudflared
           k3sup
+>>>>>>> 1f4c332 (WIP)
           kubectl
           kubernetes-helm
-          luaFile
+<<<<<<< HEAD
           nodePackages_latest.bash-language-server
           shellharden
+||||||| parent of 1f4c332 (WIP)
+=======
+          luaFile
+          packer
+>>>>>>> 1f4c332 (WIP)
           terraform
           terraform-ls
-          vault
           yaml-language-server
         ]
         ++ newPackages;
@@ -56,7 +81,6 @@ in
           alias tay='${pkgs.terraform}/bin/terraform apply -auto-approve'
           alias tc='${pkgs.terraform}/bin/terraform console'
           alias td='${pkgs.terraform}/bin/terraform destroy'
-          alias tdy='${pkgs.terraform}/bin/terraform destroy -auto-approve'
           alias tp='${pkgs.terraform}/bin/terraform plan'
           alias ts='${pkgs.terraform}/bin/terraform state'
 

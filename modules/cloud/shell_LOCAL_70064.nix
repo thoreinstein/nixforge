@@ -1,35 +1,31 @@
 {
   pkgs,
-  packages ? [],
+  buildInputs ? [],
   shellHook ? "",
 }: let
   luaFile = pkgs.callPackage ./lua.nix {inherit pkgs;};
-  newPackages = packages;
+  newBuildInputs = buildInputs;
   newShellHook = shellHook;
 in
   with pkgs;
     mkShell {
       name = "NixForge Cloud Shell";
-      packages =
+      buildInputs =
         [
           alejandra
           ansible
           ansible-language-server
-          ansible-lint
           beautysh
-          cloudflared
-          k3sup
+          luaFile
           kubectl
           kubernetes-helm
-          luaFile
           nodePackages_latest.bash-language-server
           shellharden
           terraform
           terraform-ls
-          vault
           yaml-language-server
         ]
-        ++ newPackages;
+        ++ newBuildInputs;
 
       shellHook =
         ''
@@ -56,7 +52,6 @@ in
           alias tay='${pkgs.terraform}/bin/terraform apply -auto-approve'
           alias tc='${pkgs.terraform}/bin/terraform console'
           alias td='${pkgs.terraform}/bin/terraform destroy'
-          alias tdy='${pkgs.terraform}/bin/terraform destroy -auto-approve'
           alias tp='${pkgs.terraform}/bin/terraform plan'
           alias ts='${pkgs.terraform}/bin/terraform state'
 

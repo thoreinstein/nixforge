@@ -9,7 +9,18 @@
 in
   with pkgs;
     mkShell {
-      buildInputs = [alejandra luaFile nil codespell nodePackages.bash-language-server shellharden] ++ newBuildInputs;
+      buildInputs =
+        [
+          alejandra
+          ansible
+          ansible-language-server
+          luaFile
+          kubectl
+          terraform
+          terraform-ls
+          yaml-language-server
+        ]
+        ++ newBuildInputs;
 
       shellHook =
         ''
@@ -32,10 +43,14 @@ in
             trap cleanup EXIT
           fi
 
-          alias nd="nix develop"
-          alias ne="exit"
-          alias nfu="nix flake update"
-          alias nr="nix repl"
+          alias tp="${pkgs.terraform}/bin/terraform plan"
+          alias ta="${pkgs.terraform}/bin/terraform apply"
+          alias td="${pkgs.terraform}/bin/terraform destroy"
+          alias ti="${pkgs.terraform}/bin/terraform init -upgrade"
+          alias tc="${pkgs.terraform}/bin/terraform console"
+
+          source <(kubectl completion bash)
+          source <(helm completion bash)
         ''
         + newShellHook;
     }
