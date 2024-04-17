@@ -2,6 +2,7 @@
   pkgs,
   packages ? [],
   shellHook ? "",
+  name ? "NixForge Cloud Shell",
 }: let
   luaFile = pkgs.callPackage ./lua.nix {inherit pkgs;};
   newPackages = packages;
@@ -9,8 +10,8 @@
 in
   with pkgs;
     mkShell {
-      name = "NixForge Cloud Shell";
-      packages =
+      name = name;
+      buildInputs =
         [
           alejandra
           ansible
