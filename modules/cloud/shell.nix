@@ -59,6 +59,9 @@ in
           alias tdy='${pkgs.terraform}/bin/terraform destroy -auto-approve'
           alias tp='${pkgs.terraform}/bin/terraform plan'
           alias ts='${pkgs.terraform}/bin/terraform state'
+          alias ti='${pkgs.terraform}/bin/terraform init'
+          alias tiu='${pkgs.terraform}/bin/terraform init -upgrade'
+          alias tf='${pkgs.terraform}/bin/terraform fmt -recursive'
 
           source <(kubectl completion bash)
           source <(helm completion bash)
