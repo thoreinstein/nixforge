@@ -13,6 +13,7 @@ in
       name = name;
       buildInputs =
         [
+          age
           alejandra
           ansible
           ansible-language-server

@@ -27,7 +27,7 @@
           inherit pkgs;
 
           # Extra build inputs to install
-          buildInputs = [];
+          packages = [];
 
           # Extra shell hooks to install
           shellHook = "";
